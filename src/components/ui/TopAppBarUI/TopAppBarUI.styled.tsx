@@ -6,6 +6,8 @@ export const TopBarContainer = styled.div`
     flex-direction: column;
     background-color: #fff;
     padding: 8px 16px 0px;
+    position: sticky;
+    top: 0;
 `;
 
 export const SearchLabel = styled.div`
@@ -39,6 +41,7 @@ export const FilterIcon = styled.svg`
     width: 20px;
     height: 12px;
     flex-shrink: 0;
+    cursor: pointer;
 `;
 
 export const SearchInput = styled.input`
@@ -78,4 +81,6 @@ export const Separator = styled.hr`
     border: none;
     width: 100%;
     border-top: 0.33px solid #c3c3c6;
+    position: sticky;
+    top: 153px;
 `;
