@@ -74,9 +74,19 @@ export const HomePage: React.FC = () => {
                         nextBirthday.setFullYear(today.getFullYear() + 1);
                     }
 
+                    let age = today.getFullYear() - birthDate.getFullYear();
+                    if (
+                        today.getMonth() < birthDate.getMonth() ||
+                        (today.getMonth() === birthDate.getMonth() &&
+                            today.getDate() < birthDate.getDate())
+                    ) {
+                        age--;
+                    }
+
                     return {
                         ...user,
                         nextBirthday,
+                        age
                     };
                 })
                 .sort(
