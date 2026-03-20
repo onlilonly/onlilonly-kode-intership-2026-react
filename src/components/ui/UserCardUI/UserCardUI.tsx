@@ -33,6 +33,8 @@ const UserCardUI: React.FC<UserCardUIProps> = ({
     sortOption,
 }) => {
     const isProfile = variant === "profile";
+
+    //TODO: Перенести функции форматирования в утилиты
     const date = new Date(user.birthday);
     const formattedDate = date.toLocaleDateString("ru-RU", {
         day: "numeric",
@@ -41,6 +43,19 @@ const UserCardUI: React.FC<UserCardUIProps> = ({
     const formattedPhone = (phone: string) => {
         const digits = phone.replace(/\D/g, "");
         return `+${digits[0]} (${digits.slice(1, 4)}) ${digits.slice(4, 7)} ${digits.slice(7, 9)} ${digits.slice(9, 11)}`;
+    };
+    const formattedAge = (age: number) => {
+        if (!age && age !== 0) return "Младенец";
+        const lastDigit = age % 10;
+        const lastTwoDigits = age % 100;
+
+        if (lastDigit === 1 && lastTwoDigits !== 11) return `${age} год`;
+        if (
+            [2, 3, 4].includes(lastDigit) &&
+            ![12, 13, 14].includes(lastTwoDigits)
+        )
+            return `${age} года`;
+        return `${age} лет`;
     };
 
     if (isProfile) {
@@ -81,7 +96,9 @@ const UserCardUI: React.FC<UserCardUIProps> = ({
                         <Birthday>
                             {formattedDate} {date.getFullYear()}
                         </Birthday>
-                        <UserAge>{user.age} года</UserAge>
+                        {user.age && (
+                            <UserAge>{formattedAge(user.age)}</UserAge>
+                        )}
                     </BirthdayBlockProfile>
                 </Extra>
 
