@@ -22,5 +22,5 @@ export interface TUser {
     department: TDepartment;
     position: string;
     birthday: string;
-    phone?: string;
+    phone: string;
 }
