@@ -4,7 +4,7 @@ import type { TUser } from "../../../types";
 import UserCard from "../../UserCard/UserCard";
 
 interface UserListUIProps {
-    users: (TUser & { nextBirthday?: Date, age?: number })[];
+    users: (TUser & { nextBirthday?: Date })[];
     variant?: "list" | "profile";
     sortOption?: string;
 }
@@ -42,20 +42,30 @@ const UserListUI: React.FC<UserListUIProps> = ({
     );
 
     return (
-    <List>
-      {thisYearUsers.map((user) => (
-        <UserCard key={user.id} user={user} variant={variant} sortOption={sortOption} />
-      ))}
+        <List>
+            {thisYearUsers.map((user) => (
+                <UserCard
+                    key={user.id}
+                    user={user}
+                    variant={variant}
+                    sortOption={sortOption}
+                />
+            ))}
 
-      {nextYearUsers.length > 0 && (
-        <YearSeparator>{today.getFullYear() + 1}</YearSeparator>
-      )}
+            {nextYearUsers.length > 0 && (
+                <YearSeparator>{today.getFullYear() + 1}</YearSeparator>
+            )}
 
-      {nextYearUsers.map((user) => (
-        <UserCard key={user.id} user={user} variant={variant} sortOption={sortOption} />
-      ))}
-    </List>
-  );
+            {nextYearUsers.map((user) => (
+                <UserCard
+                    key={user.id}
+                    user={user}
+                    variant={variant}
+                    sortOption={sortOption}
+                />
+            ))}
+        </List>
+    );
 };
 
 export default UserListUI;
