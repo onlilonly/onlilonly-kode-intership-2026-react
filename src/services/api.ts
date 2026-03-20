@@ -24,6 +24,6 @@ export const getUsersApi = (): Promise<TUser[]> =>
 export const getUsersByDepartmentApi = (
     department: TDepartment,
 ): Promise<TUser[]> =>
-    fetch(`${URL}/users?__example=${department}`)
+    fetch(`${BASE_URL}/users?__example=${department}`)
         .then((res) => checkResponse<UsersResponse>(res))
         .then((data) => data.items);
