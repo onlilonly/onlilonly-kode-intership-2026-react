@@ -1,14 +1,36 @@
 import React from "react";
 import { Container } from "./HomePageUI.styled";
+import { TopAppBar } from "../../../TopAppBar/TopAppBar";
+import { UserList } from "../../../UserList/UserList";
+import type { TUser } from "../../../../types";
 
-const HomePageUI: React.FC = () => {
+interface HomePageProps {
+    filters: string[];
+    onSearch?: (value: string) => void;
+    onFilterChange?: (filter: string) => void;
+    onSortChange?: (option: "alphabet" | "birthday") => void;
+    users: TUser[];
+    activeFilter: string;
+}
+
+const HomePageUI: React.FC<HomePageProps> = ({
+    filters,
+    onSearch,
+    onFilterChange,
+    onSortChange,
+    users,
+    activeFilter,
+}) => {
     return (
         <Container>
-            {/* TODO: вставить TopBar после создания */}
-            <div>TopBar</div>
-
-            {/* TODO: вставить UserList после создания */}
-            <div>UserList</div>
+            <TopAppBar
+                filters={filters}
+                onSearch={onSearch}
+                onFilterChange={onFilterChange}
+                onSortChange={onSortChange}
+                activeFilter={activeFilter}
+            />
+            <UserList variant="list" users={users} />
         </Container>
     );
 };

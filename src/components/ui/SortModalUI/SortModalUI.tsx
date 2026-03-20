@@ -24,8 +24,8 @@ export const SortModalUI: React.FC<SortModalUIProps> = ({
     if (!isOpen) return null;
 
     return (
-        <Overlay>
-            <ModalContainer>
+        <Overlay onClick={onClose}>
+            <ModalContainer onClick={(e) => e.stopPropagation()}>
                 <Header>
                     <div></div>
                     <Title>Сортировка</Title>

@@ -8,7 +8,9 @@ import {
     FiltersContainer,
     FilterButton,
     FilterIcon,
+    Separator,
 } from "./TopAppBarUI.styled";
+import { FILTER_LABELS } from "../../../constants/filters";
 
 interface TopBarContainerUIProps {
     searchValue: string;
@@ -16,6 +18,7 @@ interface TopBarContainerUIProps {
     filters: string[];
     activeFilter: string;
     onFilterClick: (filter: string) => void;
+    onFilterIconClick?: () => void;
 }
 
 export const TopAppBarUI: React.FC<TopBarContainerUIProps> = ({
@@ -24,8 +27,10 @@ export const TopAppBarUI: React.FC<TopBarContainerUIProps> = ({
     filters,
     activeFilter,
     onFilterClick,
+    onFilterIconClick,
 }) => {
     return (
+        <>
         <TopBarContainer>
             <SearchLabel>Поиск</SearchLabel>
 
@@ -49,6 +54,7 @@ export const TopAppBarUI: React.FC<TopBarContainerUIProps> = ({
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 20 12"
+                    onClick={onFilterIconClick}
                 >
                     <path
                         fill="#c3c3c6"
@@ -58,16 +64,24 @@ export const TopAppBarUI: React.FC<TopBarContainerUIProps> = ({
             </SearchInputContainer>
 
             <FiltersContainer>
+                <FilterButton
+                    active={activeFilter === "all"}
+                    onClick={() => onFilterClick("all")}
+                >
+                    Все
+                </FilterButton>
                 {filters.map((filter) => (
                     <FilterButton
                         key={filter}
                         active={filter === activeFilter}
                         onClick={() => onFilterClick(filter)}
                     >
-                        {filter}
+                        {FILTER_LABELS[filter]}
                     </FilterButton>
                 ))}
             </FiltersContainer>
         </TopBarContainer>
+        <Separator/>
+        </>
     );
 };
