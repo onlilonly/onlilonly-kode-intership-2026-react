@@ -10,7 +10,8 @@ export type TDepartment =
     | "pr"
     | "backend"
     | "support"
-    | "analytics";
+    | "analytics"
+    | string;
 
 export interface TUser {
     id: string;
@@ -20,6 +21,6 @@ export interface TUser {
     avatarUrl: string;
     department: TDepartment;
     position: string;
-    birthday?: string;
+    birthday: string;
     phone?: string;
 }
