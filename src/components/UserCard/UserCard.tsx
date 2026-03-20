@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 interface UserCardProps {
     user: TUser;
     variant?: "list" | "profile";
+    sortOption: string;
 }
 
-const UserCard: React.FC<UserCardProps> = ({ user, variant = "list" }) => {
+const UserCard: React.FC<UserCardProps> = ({ user, sortOption, variant = "list" }) => {
     const navigate = useNavigate();
 
     const handleClick = (id: string) => {
@@ -17,7 +18,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, variant = "list" }) => {
         }
     };
 
-    return <UserCardUI {...user} variant={variant} onClick={handleClick} />;
+    return <UserCardUI user={user} variant={variant} onClick={handleClick} sortOption={sortOption}/>;
 };
 
 export default UserCard;

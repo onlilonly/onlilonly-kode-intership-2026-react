@@ -57,17 +57,37 @@ export const HomePage: React.FC = () => {
         });
     }, [users, searchValue]);
 
-    //сортировка по дате по ТЗ будет сделана позже
     const sortedUsers = useMemo(() => {
-        return [...filteredUsers].sort((a, b) => {
-            if (sortOption === "birthday") {
-                return (
-                    new Date(a.birthday).getTime() -
-                    new Date(b.birthday).getTime()
+        if (sortOption === "birthday") {
+            const today = new Date();
+
+            return [...filteredUsers]
+                .map((user) => {
+                    const birthDate = new Date(user.birthday);
+
+                    let nextBirthday = new Date(
+                        today.getFullYear(),
+                        birthDate.getMonth(),
+                        birthDate.getDate(),
+                    );
+                    if (nextBirthday < today) {
+                        nextBirthday.setFullYear(today.getFullYear() + 1);
+                    }
+
+                    return {
+                        ...user,
+                        nextBirthday,
+                    };
+                })
+                .sort(
+                    (a, b) =>
+                        a.nextBirthday.getTime() - b.nextBirthday.getTime(),
                 );
-            }
-            return a.firstName.localeCompare(b.firstName);
-        });
+        }
+
+        return [...filteredUsers].sort((a, b) =>
+            a.firstName.localeCompare(b.firstName),
+        );
     }, [filteredUsers, sortOption]);
 
     if (isLoading) return <div>Загрузка пользователей...</div>;
@@ -81,6 +101,7 @@ export const HomePage: React.FC = () => {
             onSortChange={onSortChange}
             users={sortedUsers}
             activeFilter={activeFilter}
+            sortOption={sortOption}
         />
     );
 };

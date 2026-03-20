@@ -2,7 +2,6 @@ import styled, { css } from "styled-components";
 
 export const Card = styled.li<{ variant?: "list" | "profile" }>`
     display: flex;
-    align-items: flex-start;
     background-color: #fff;
     cursor: pointer;
 
@@ -19,7 +18,13 @@ export const Card = styled.li<{ variant?: "list" | "profile" }>`
 export const ListCard = styled(Card)`
     flex-direction: row;
     padding: 0 16px;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+export const Container = styled.div`
+    display: flex;
+    flex-direction: row;
 `;
 
 export const ProfileCard = styled(Card)`
@@ -113,4 +118,10 @@ export const Extra = styled.div`
     color: #050510;
     display: flex;
     gap: 8px;
+`;
+
+export const BirthdayBlock = styled.div`
+    font-size: 0.938rem;
+    font-weight: 400;
+    color: #55555c;
 `;

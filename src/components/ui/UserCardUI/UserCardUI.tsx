@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use } from "react";
 import {
     ListCard,
     ProfileCard,
@@ -9,54 +9,51 @@ import {
     Tag,
     Department,
     Extra,
+    BirthdayBlock,
+    Container
 } from "./UserCardUI.styled";
 import type { TUser } from "../../../types";
 import DefaultAvatar from "../../../assets/default-avatar.png";
 
-interface UserCardUIProps extends TUser {
+interface UserCardUIProps {
+    user: TUser & { nextBirthday?: Date };
     variant?: "list" | "profile";
     onClick?: (id: string) => void;
+    sortOption: string;
 }
 
 const UserCardUI: React.FC<UserCardUIProps> = ({
-    id,
-    firstName,
-    lastName,
-    userTag,
-    avatarUrl,
-    department,
-    position,
-    birthday,
-    phone,
+    user,
     variant = "list",
     onClick,
+    sortOption,
 }) => {
     const isProfile = variant === "profile";
 
     if (isProfile) {
         return (
             <ProfileCard
-                onClick={() => onClick && onClick(id)}
+                onClick={() => onClick && onClick(user.id)}
                 variant={variant}
             >
                 <Avatar
-                    src={DefaultAvatar || avatarUrl}
-                    alt={`${firstName} ${lastName}`}
+                    src={DefaultAvatar || user.avatarUrl}
+                    alt={`${user.firstName} ${user.lastName}`}
                     variant={variant}
                     large
                 />
                 <ProfileInfo variant={variant}>
                     <Name variant={variant}>
-                        {firstName} {lastName}
+                        {user.firstName} {user.lastName}
                     </Name>
-                    <Tag variant={variant}>@{userTag}</Tag>
+                    <Tag variant={variant}>@{user.userTag}</Tag>
                     <Department>
-                        {department} - {position}
+                        {user.department} - {user.position}
                     </Department>
-                    {(birthday || phone) && (
+                    {(user.birthday || user.phone) && (
                         <Extra>
-                            {birthday && <span> {birthday}</span>}
-                            {phone && <span> {phone}</span>}
+                            {user.birthday && <span> {user.birthday}</span>}
+                            {user.phone && <span> {user.phone}</span>}
                         </Extra>
                     )}
                 </ProfileInfo>
@@ -65,19 +62,26 @@ const UserCardUI: React.FC<UserCardUIProps> = ({
     }
 
     return (
-        <ListCard onClick={() => onClick && onClick(id)} variant={variant}>
+        <ListCard onClick={() => onClick && onClick(user.id)} variant={variant}>
+            <Container>
             <Avatar
-                src={DefaultAvatar || avatarUrl}
-                alt={`${firstName} ${lastName}`}
+                src={DefaultAvatar || user.avatarUrl}
+                alt={`${user.firstName} ${user.lastName}`}
                 variant={variant}
             />
             <ListInfo variant={variant}>
                 <Name variant={variant}>
-                    {firstName} {lastName}
-                    <Tag variant={variant}>{userTag}</Tag>
+                    {user.firstName} {user.lastName}
+                    <Tag variant={variant}>{user.userTag}</Tag>
                 </Name>
-                <Department>{position}</Department>
+                <Department>{user.position}</Department>
             </ListInfo>
+            </Container>
+            {sortOption === "birthday" && user.nextBirthday && (
+                <BirthdayBlock>
+                    {`${user.nextBirthday.getDate()} ${user.nextBirthday.toLocaleString("default", { month: "short" }).replace('.', '')}`}
+                </BirthdayBlock>
+            )}
         </ListCard>
     );
 };

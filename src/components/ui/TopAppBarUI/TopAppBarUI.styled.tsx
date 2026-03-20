@@ -35,6 +35,7 @@ export const SearchIcon = styled.svg`
     height: 20px;
     flex-shrink: 0;
     margin-right: 10px;
+    order: -1;
 `;
 
 export const FilterIcon = styled.svg`
@@ -56,6 +57,11 @@ export const SearchInput = styled.input`
 
     &::placeholder {
         color: #c3c3c6;
+    }
+
+    &:focus + svg path {
+        fill: #050510;
+        transition: fill 0.2s;
     }
 `;
 

@@ -8,10 +8,11 @@ interface TopAppBarProps {
     onFilterChange?: (filter: string) => void;
     onSortChange?: (option: "alphabet" | "birthday") => void;
     activeFilter: string;
+    sortOption: string;
 }
 
 export const TopAppBar: React.FC<TopAppBarProps> = React.memo(
-    ({ filters, onSearch, onFilterChange, onSortChange, activeFilter }) => {
+    ({ filters, onSearch, onFilterChange, onSortChange, activeFilter, sortOption }) => {
         const [searchValue, setSearchValue] = useState("");
         const [isSortModalOpen, setIsSortModalOpen] = useState(false);
 
@@ -40,6 +41,7 @@ export const TopAppBar: React.FC<TopAppBarProps> = React.memo(
                     activeFilter={activeFilter}
                     onFilterClick={handleFilterClick}
                     onFilterIconClick={openSortModal}
+                    sortOption={sortOption}
                 />
 
                 <SortModal

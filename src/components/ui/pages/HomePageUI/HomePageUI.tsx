@@ -11,6 +11,7 @@ interface HomePageProps {
     onSortChange?: (option: "alphabet" | "birthday") => void;
     users: TUser[];
     activeFilter: string;
+    sortOption: string;
 }
 
 const HomePageUI: React.FC<HomePageProps> = ({
@@ -20,6 +21,7 @@ const HomePageUI: React.FC<HomePageProps> = ({
     onSortChange,
     users,
     activeFilter,
+    sortOption
 }) => {
     return (
         <Container>
@@ -29,8 +31,9 @@ const HomePageUI: React.FC<HomePageProps> = ({
                 onFilterChange={onFilterChange}
                 onSortChange={onSortChange}
                 activeFilter={activeFilter}
+                sortOption={sortOption}
             />
-            <UserList variant="list" users={users} />
+            <UserList variant="list" users={users} sortOption={sortOption}/>
         </Container>
     );
 };
