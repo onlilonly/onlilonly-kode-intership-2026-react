@@ -11,6 +11,7 @@ import {
     Extra,
 } from "./UserCardUI.styled";
 import type { TUser } from "../../../types";
+import DefaultAvatar from '../../../assets/default-avatar.png'
 
 interface UserCardUIProps extends TUser {
     variant?: "list" | "profile";
@@ -39,7 +40,7 @@ const UserCardUI: React.FC<UserCardUIProps> = ({
                 variant={variant}
             >
                 <Avatar
-                    src={avatarUrl}
+                    src={DefaultAvatar || avatarUrl}
                     alt={`${firstName} ${lastName}`}
                     variant={variant}
                     large
@@ -66,7 +67,7 @@ const UserCardUI: React.FC<UserCardUIProps> = ({
     return (
         <ListCard onClick={() => onClick && onClick(id)} variant={variant}>
             <Avatar
-                src={avatarUrl || "/default-avatar.png"}
+                src={DefaultAvatar || avatarUrl}
                 alt={`${firstName} ${lastName}`}
                 variant={variant}
             />
