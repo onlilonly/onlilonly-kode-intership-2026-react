@@ -11,7 +11,7 @@ import {
     Extra,
 } from "./UserCardUI.styled";
 import type { TUser } from "../../../types";
-import DefaultAvatar from '../../../assets/default-avatar.png'
+import DefaultAvatar from "../../../assets/default-avatar.png";
 
 interface UserCardUIProps extends TUser {
     variant?: "list" | "profile";
