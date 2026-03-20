@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 interface UserCardProps {
     user: TUser;
     variant?: "list" | "profile";
-    sortOption: string;
+    sortOption?: string;
 }
 
 const UserCard: React.FC<UserCardProps> = ({ user, sortOption, variant = "list" }) => {

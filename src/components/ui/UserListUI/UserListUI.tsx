@@ -4,9 +4,9 @@ import type { TUser } from "../../../types";
 import UserCard from "../../UserCard/UserCard";
 
 interface UserListUIProps {
-    users: (TUser & { nextBirthday?: Date })[];
+    users: (TUser & { nextBirthday?: Date, age?: number })[];
     variant?: "list" | "profile";
-    sortOption: string;
+    sortOption?: string;
 }
 
 const UserListUI: React.FC<UserListUIProps> = ({

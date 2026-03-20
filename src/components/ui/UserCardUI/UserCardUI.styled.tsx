@@ -12,6 +12,7 @@ export const Card = styled.li<{ variant?: "list" | "profile" }>`
             align-items: center;
             background-color: #fff;
             padding-bottom: 16px;
+            cursor: default;
         `}
 `;
 
@@ -30,7 +31,8 @@ export const Container = styled.div`
 export const ProfileCard = styled(Card)`
     flex-direction: column;
     align-items: center;
-    padding: 16px;
+    padding: 0 16px 24px;
+    background-color: #f7f7f8;
 `;
 
 export const Avatar = styled.img<{
@@ -58,12 +60,6 @@ export const Info = styled.div<{ variant?: "list" | "profile" }>`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
-    ${({ variant }) =>
-        variant === "profile" &&
-        css`
-            align-items: center;
-        `}
 `;
 
 export const ListInfo = styled(Info)`
@@ -75,11 +71,13 @@ export const ProfileInfo = styled(Info)`
 `;
 
 export const Name = styled.span<{ variant?: "list" | "profile" }>`
+    display: flex;
+    flex-direction: row;
     font-weight: 500;
     font-size: 1rem;
     color: #050510;
     padding-top: 17px;
-    align-items: center;
+    align-items: flex-end;
     line-height: 20px;
 
     ${({ variant }) =>
@@ -87,6 +85,9 @@ export const Name = styled.span<{ variant?: "list" | "profile" }>`
         css`
             font-size: 1.5rem;
             font-weight: 700;
+            margin: 12px 0;
+            padding-top: 0;
+            justify-content: center;
         `}
 `;
 
@@ -113,11 +114,51 @@ export const Department = styled.span`
 `;
 
 export const Extra = styled.div`
-    margin-top: 8px;
+    padding: 20px 16px;
     font-size: 0.75rem;
     color: #050510;
     display: flex;
+    align-items: center;
     gap: 8px;
+    width: 100%;
+    justify-content: flex-start;
+    background-color: #fff;
+
+    &:last-child {
+        margin-top: 4px;
+    }
+`;
+
+export const BirthdayBlockProfile = styled.div`
+    display: flex;
+    width: 100%;
+    font-size: 0.938rem;
+    font-weight: 400;
+    color: #55555c;
+    align-items: center;
+    line-height: 20px;
+    justify-content: space-between;
+`;
+
+export const Birthday = styled.span`
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #050510;
+`;
+
+export const UserAge = styled.span`
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    color: inherit;
+`;
+
+export const Phone = styled.span`
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #050510;
 `;
 
 export const BirthdayBlock = styled.div`
