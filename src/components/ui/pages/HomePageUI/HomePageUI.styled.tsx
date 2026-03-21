@@ -5,4 +5,11 @@ export const Container = styled.div`
     flex-direction: column;
     height: 100vh;
     background: #fff;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `;
