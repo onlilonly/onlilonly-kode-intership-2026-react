@@ -1,3 +1,4 @@
+import React from "react";
 import {
     List,
     AvatarSkeleton,
@@ -11,7 +12,7 @@ import {
     Name,
 } from "../../components/ui/UserCardUI/UserCardUI.styled";
 
-const UserCardSkeleton = () => {
+const UserCardSkeleton: React.FC = () => {
     return (
         <ListCard>
             <Container>
@@ -28,7 +29,7 @@ const UserCardSkeleton = () => {
     );
 };
 
-export const UsersSkeleton = () => {
+export const UsersSkeleton: React.FC = () => {
     return (
         <List>
             {Array.from({ length: 10 }).map((_, i) => (
