@@ -95,6 +95,8 @@ export const FilterButton = styled.button<{ active?: boolean }>`
     border: none;
     padding: 8px 12px;
     font-size: 0.938rem;
+    line-height: 20px;
+    font-weight: ${({ active }) => (active ? "600" : "500")};
     color: ${({ active }) => (active ? "#050510" : "#97979B")};
     border-bottom: ${({ active }) =>
         active ? "2px solid #6534FF" : "2px solid transparent"};
@@ -107,5 +109,5 @@ export const Separator = styled.hr`
     width: 100%;
     border-top: 0.33px solid #c3c3c6;
     position: sticky;
-    top: 153px;
+    top: 150px;
 `;
