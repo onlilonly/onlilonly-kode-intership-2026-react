@@ -90,8 +90,6 @@ export const HomePage: React.FC = () => {
         );
     }, [filteredUsers, sortOption]);
 
-    if (error) return <div>Ошибка: {error}</div>;
-
     return (
         <HomePageUI
             filters={filters}
@@ -102,6 +100,7 @@ export const HomePage: React.FC = () => {
             activeFilter={activeFilter}
             sortOption={sortOption}
             isLoading={isLoading}
+            error={error}
         />
     );
 };

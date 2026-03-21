@@ -3,6 +3,10 @@ import { Container } from "./HomePageUI.styled";
 import { TopAppBar } from "../../../TopAppBar/TopAppBar";
 import { UserList } from "../../../UserList/UserList";
 import { UsersSkeleton } from "../../../../pages/LoaderPage/LoaderPage";
+import {
+    ErrorBlockPage,
+    NoOneFoundBlock,
+} from "../../../../pages/ErrorPage/ErrorPage";
 import type { TUser } from "../../../../types";
 
 interface HomePageProps {
@@ -14,6 +18,7 @@ interface HomePageProps {
     activeFilter: string;
     sortOption: string;
     isLoading: boolean;
+    error: string | null;
 }
 
 const HomePageUI: React.FC<HomePageProps> = ({
@@ -25,6 +30,7 @@ const HomePageUI: React.FC<HomePageProps> = ({
     activeFilter,
     sortOption,
     isLoading,
+    error,
 }) => {
     return (
         <Container>
@@ -36,14 +42,18 @@ const HomePageUI: React.FC<HomePageProps> = ({
                 activeFilter={activeFilter}
                 sortOption={sortOption}
             />
-            {isLoading ? (
+            {error !== null ? (
+                <ErrorBlockPage />
+            ) : isLoading ? (
                 <UsersSkeleton />
-            ) : (
+            ) : users.length > 0 ? (
                 <UserList
                     variant="list"
                     users={users}
                     sortOption={sortOption}
                 />
+            ) : (
+                <NoOneFoundBlock />
             )}
         </Container>
     );
