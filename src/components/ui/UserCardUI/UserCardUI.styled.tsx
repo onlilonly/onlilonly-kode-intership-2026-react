@@ -154,11 +154,15 @@ export const UserAge = styled.span`
     color: inherit;
 `;
 
-export const Phone = styled.span`
+export const Phone = styled.a`
     display: block;
     font-size: 1rem;
     font-weight: 500;
     color: #050510;
+
+    &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export const BirthdayBlock = styled.div`
