@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "./HomePageUI.styled";
 import { TopAppBar } from "../../../TopAppBar/TopAppBar";
 import { UserList } from "../../../UserList/UserList";
+import { UsersSkeleton } from "../../../../pages/LoaderPage/LoaderPage";
 import type { TUser } from "../../../../types";
 
 interface HomePageProps {
@@ -12,6 +13,7 @@ interface HomePageProps {
     users: TUser[];
     activeFilter: string;
     sortOption: string;
+    isLoading: boolean;
 }
 
 const HomePageUI: React.FC<HomePageProps> = ({
@@ -21,7 +23,8 @@ const HomePageUI: React.FC<HomePageProps> = ({
     onSortChange,
     users,
     activeFilter,
-    sortOption
+    sortOption,
+    isLoading,
 }) => {
     return (
         <Container>
@@ -33,7 +36,15 @@ const HomePageUI: React.FC<HomePageProps> = ({
                 activeFilter={activeFilter}
                 sortOption={sortOption}
             />
-            <UserList variant="list" users={users} sortOption={sortOption}/>
+            {isLoading ? (
+                <UsersSkeleton />
+            ) : (
+                <UserList
+                    variant="list"
+                    users={users}
+                    sortOption={sortOption}
+                />
+            )}
         </Container>
     );
 };

@@ -90,7 +90,6 @@ export const HomePage: React.FC = () => {
         );
     }, [filteredUsers, sortOption]);
 
-    if (isLoading) return <div>Загрузка пользователей...</div>;
     if (error) return <div>Ошибка: {error}</div>;
 
     return (
@@ -102,6 +101,7 @@ export const HomePage: React.FC = () => {
             users={sortedUsers}
             activeFilter={activeFilter}
             sortOption={sortOption}
+            isLoading={isLoading}
         />
     );
 };
