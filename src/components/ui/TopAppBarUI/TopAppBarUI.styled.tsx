@@ -65,10 +65,29 @@ export const SearchInput = styled.input`
     }
 `;
 
-export const FiltersContainer = styled.div`
+export const FiltersContainer = styled.ul`
     display: flex;
+    margin: 0;
+    padding: 0;
     margin-top: 8px;
     padding-top: 8px;
+    list-style: none;
+    width: clamp(21.4375rem, -2rem + 100vw, 118rem);
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+`;
+
+export const Li = styled.li`
+    margin: 0;
+    padding: 0;
 `;
 
 export const FilterButton = styled.button<{ active?: boolean }>`
