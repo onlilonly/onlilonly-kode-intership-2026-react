@@ -2,6 +2,7 @@ import React, { useEffect, useCallback, useMemo, useState } from "react";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { useNetworkStatus } from "../../hooks/useNetworkStatus";
+import { useSortedFilteredUsers } from "../../hooks/useSortedFilteredUsers";
 import {
     getUsers,
     getUsersByDepartment,
@@ -64,11 +65,15 @@ export const HomePage: React.FC = () => {
     const option = useAppSelector((state) => state.users.option);
     const activeFilter = useAppSelector((state) => state.users.filter);
 
-    const filters = Object.keys(FILTER_LABELS) as TDepartment[];
+    const sortedUsers = useSortedFilteredUsers({
+        users,
+        usersByDepartment,
+        search,
+        option,
+        activeFilter,
+    });
 
-    const baseUsers = useMemo(() => {
-        return activeFilter === "all" ? users : usersByDepartment;
-    }, [activeFilter, users, usersByDepartment]);
+    const filters = Object.keys(FILTER_LABELS) as TDepartment[];
 
     useEffect(() => {
         dispatch(getUsers());
@@ -88,50 +93,6 @@ export const HomePage: React.FC = () => {
         },
         [dispatch],
     );
-
-    const filteredUsers = useMemo(() => {
-        return baseUsers.filter((user) => {
-            if (!search) return true;
-            return (
-                user.firstName.toLowerCase().includes(search.toLowerCase()) ||
-                user.lastName.toLowerCase().includes(search.toLowerCase()) ||
-                user.userTag.toLowerCase().includes(search.toLowerCase())
-            );
-        });
-    }, [baseUsers, search]);
-
-    const sortedUsers = useMemo(() => {
-        if (option === "birthday") {
-            const today = new Date();
-
-            return [...filteredUsers]
-                .map((user) => {
-                    const birthDate = new Date(user.birthday);
-
-                    let nextBirthday = new Date(
-                        today.getFullYear(),
-                        birthDate.getMonth(),
-                        birthDate.getDate(),
-                    );
-                    if (nextBirthday < today) {
-                        nextBirthday.setFullYear(today.getFullYear() + 1);
-                    }
-
-                    return {
-                        ...user,
-                        nextBirthday,
-                    };
-                })
-                .sort(
-                    (a, b) =>
-                        a.nextBirthday.getTime() - b.nextBirthday.getTime(),
-                );
-        }
-
-        return [...filteredUsers].sort((a, b) =>
-            a.firstName.localeCompare(b.firstName),
-        );
-    }, [filteredUsers, option]);
 
     return (
         <HomePageUI
