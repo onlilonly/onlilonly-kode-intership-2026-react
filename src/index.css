@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+#root {
+    height: 100vh;
+}
+
 body {
     min-height: 100vh;
     font-family: 'Inter', sans-serif;
@@ -32,3 +36,4 @@ a {
     text-decoration: none;
     color: inherit;
 }
+

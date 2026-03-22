@@ -19,7 +19,7 @@ export const UserPage: React.FC = () => {
 
     const user = users.find((u) => u.id === id);
 
-        const userWithAge = useMemo(() => {
+    const userWithAge = useMemo(() => {
         if (!user) return null;
 
         const today = new Date();

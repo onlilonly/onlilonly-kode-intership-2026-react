@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const ErrorContainer = styled.div`
+    height: 100%;
     flex: 1;
     display: flex;
     flex-direction: column;

@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { HomePage } from "./pages/HomePage/HomePage";
 import { UserPage } from "./pages/UserPage/UserPage";
+import { ErrorBlockPage } from "./pages/ErrorPage/ErrorPage";
 
 const App = () => {
     return (
@@ -8,7 +9,7 @@ const App = () => {
             <Route path="/" element={<Navigate to="/users" />} />
             <Route path="/users" element={<HomePage />} />
             <Route path="/users/:id" element={<UserPage />} />
-            <Route path="*" element={<div>404</div>} />
+            <Route path="*" element={<ErrorBlockPage/>} />
         </Routes>
     );
 };

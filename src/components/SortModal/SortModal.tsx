@@ -1,32 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import { SortModalUI } from "../ui/SortModalUI/SortModalUI";
 
 interface SortModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  initialOption?: "alphabet" | "birthday";
-  onOptionChange?: (option: "alphabet" | "birthday") => void;
+    isOpen: boolean;
+    onClose: () => void;
+    selectedOption: "alphabet" | "birthday";
+    onOptionChange?: (option: "alphabet" | "birthday") => void;
 }
 
 export const SortModal: React.FC<SortModalProps> = ({
-  isOpen,
-  onClose,
-  onOptionChange,
+    isOpen,
+    onClose,
+    onOptionChange,
+    selectedOption,
 }) => {
-  const [selectedOption, setSelectedOption] = useState<"alphabet" | "birthday">("alphabet");
+    const handleOptionChange = (option: "alphabet" | "birthday") => {
+        onOptionChange?.(option);
+        onClose();
+    };
 
-  const handleOptionChange = (option: "alphabet" | "birthday") => {
-    setSelectedOption(option);
-    onOptionChange?.(option);
-    onClose();
-  };
-
-  return (
-    <SortModalUI
-      isOpen={isOpen}
-      onClose={onClose}
-      selectedOption={selectedOption}
-      onOptionChange={handleOptionChange}
-    />
-  );
+    return (
+        <SortModalUI
+            isOpen={isOpen}
+            onClose={onClose}
+            selectedOption={selectedOption}
+            onOptionChange={handleOptionChange}
+        />
+    );
 };

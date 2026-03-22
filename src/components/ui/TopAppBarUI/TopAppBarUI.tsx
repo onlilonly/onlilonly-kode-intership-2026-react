@@ -9,7 +9,7 @@ import {
     FilterButton,
     FilterIcon,
     Separator,
-    Li
+    Li,
 } from "./TopAppBarUI.styled";
 import { FILTER_LABELS } from "../../../constants/filters";
 
@@ -78,9 +78,8 @@ export const TopAppBarUI: React.FC<TopBarContainerUIProps> = ({
                         Все
                     </FilterButton>
                     {filters.map((filter) => (
-                        <Li>
+                        <Li key={filter}>
                             <FilterButton
-                                key={filter}
                                 active={filter === activeFilter}
                                 onClick={() => onFilterClick(filter)}
                             >
