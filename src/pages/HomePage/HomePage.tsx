@@ -41,7 +41,26 @@ export const HomePage: React.FC = () => {
         : wasOffline
           ? "loading"
           : "ok";
+
     const search = useAppSelector((state) => state.users.search);
+    const [inputValue, setInputValue] = useState(search);
+
+    useEffect(() => {
+        setInputValue(search);
+    }, [search]);
+
+    const onSearch = useCallback((value: string) => {
+        setInputValue(value);
+    }, []);
+
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            dispatch(setSearch(inputValue));
+        }, 500);
+
+        return () => clearTimeout(handler);
+    }, [inputValue, dispatch]);
+
     const option = useAppSelector((state) => state.users.option);
     const activeFilter = useAppSelector((state) => state.users.filter);
 
@@ -53,10 +72,6 @@ export const HomePage: React.FC = () => {
 
     useEffect(() => {
         dispatch(getUsers());
-    }, []);
-
-    const onSearch = useCallback((value: string) => {
-        dispatch(setSearch(value));
     }, []);
 
     const onSortChange = useCallback((option: "alphabet" | "birthday") => {
@@ -121,7 +136,7 @@ export const HomePage: React.FC = () => {
     return (
         <HomePageUI
             filters={filters}
-            searchValue={search}
+            searchValue={inputValue}
             onSearch={onSearch}
             onFilterChange={onFilterChange}
             onSortChange={onSortChange}
