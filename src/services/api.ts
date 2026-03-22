@@ -1,4 +1,5 @@
 import type { TUser, TDepartment } from "../types";
+import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -6,24 +7,24 @@ interface UsersResponse {
     items: TUser[];
 }
 
-const checkResponse = async <T>(res: Response): Promise<T> => {
-    const data = await res.json();
+const api = axios.create({
+    baseURL: BASE_URL,
+});
 
-    if (!res.ok) {
-        throw new Error(data?.message || `Ошибка: ${res.status}`);
-    }
+export const getUsersApi = async (): Promise<TUser[]> => {
+    const { data } = await api.get<UsersResponse>("/users", {
+        params: { __example: "all" },
+    });
 
-    return data;
+    return data.items;
 };
 
-export const getUsersApi = (): Promise<TUser[]> =>
-    fetch(`${BASE_URL}/users?__example=all`)
-        .then((res) => checkResponse<UsersResponse>(res))
-        .then((data) => data.items);
-
-export const getUsersByDepartmentApi = (
+export const getUsersByDepartmentApi = async (
     department: TDepartment,
-): Promise<TUser[]> =>
-    fetch(`${BASE_URL}/users?__example=${department}`)
-        .then((res) => checkResponse<UsersResponse>(res))
-        .then((data) => data.items);
+): Promise<TUser[]> => {
+    const { data } = await api.get<UsersResponse>("/users", {
+        params: { __example: department },
+    });
+
+    return data.items;
+};
