@@ -6,7 +6,12 @@ const shimmer = keyframes`
 `;
 
 const SkeletonBlock = styled.div`
-    background: linear-gradient(90deg, #f2f2f3 25%, #e6e6e7 37%, #f2f2f3 63%);
+    background: linear-gradient(
+        90deg,
+        ${({ theme }) => theme.skeletonBase} 25%,
+        ${({ theme }) => theme.skeletonHighlight} 37%,
+        ${({ theme }) => theme.skeletonBase} 63%
+    );
     background-size: 400% 100%;
     animation: ${shimmer} 1.2s ease-in-out infinite;
     border-radius: 8px;
@@ -20,20 +25,20 @@ export const List = styled.ul`
 `;
 
 export const AvatarSkeleton = styled(SkeletonBlock)`
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  margin: 6px 16px 6px 0;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    margin: 6px 16px 6px 0;
 `;
 
 export const NameSkeleton = styled(SkeletonBlock)`
-  width: 160px;
-  height: 16px;
-  margin-top: 17px;
+    width: 160px;
+    height: 16px;
+    margin-top: 17px;
 `;
 
 export const DepartmentSkeleton = styled(SkeletonBlock)`
-  width: 100px;
-  height: 12px;
-  margin-top: 6px;
+    width: 100px;
+    height: 12px;
+    margin-top: 6px;
 `;

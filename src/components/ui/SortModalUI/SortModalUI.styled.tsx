@@ -15,7 +15,7 @@ export const Overlay = styled.div`
 
 export const ModalContainer = styled.div`
     min-width: 373px;
-    background: #fff;
+    background: ${({ theme }) => theme.bg};
     border-radius: 20px;
     padding: 16px;
 `;
@@ -33,6 +33,7 @@ export const Title = styled.h2`
     font-weight: 600;
     text-align: center;
     line-height: 24px;
+    color: ${({ theme }) => theme.text};
 `;
 
 export const CloseButton = styled.button`
@@ -62,6 +63,7 @@ export const RadioContainer = styled.div`
         line-height: 20px;
         position: relative;
         padding-left: 28px;
+        color: ${({ theme }) => theme.text};
 
         input {
             position: absolute;
@@ -78,9 +80,9 @@ export const RadioContainer = styled.div`
             transform: translateY(-50%);
             width: 20px;
             height: 20px;
-            border: 2px solid #6534ff;
+            border: 2px solid ${({ theme }) => theme.accent};
             border-radius: 50%;
-            background-color: #fff;
+            background-color: ${({ theme }) => theme.bg};
 
             &::after {
                 content: "";
@@ -90,9 +92,9 @@ export const RadioContainer = styled.div`
                 transform: translate(-50%, -50%);
                 width: 20px;
                 height: 20px;
-                border: 7px solid #6534ff;
+                border: 7px solid ${({ theme }) => theme.accent};
                 border-radius: 50%;
-                background-color: #fff;
+                background-color: ${({ theme }) => theme.bg};
                 opacity: 0;
                 transition: opacity 0.2s;
             }

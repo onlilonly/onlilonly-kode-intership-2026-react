@@ -8,6 +8,7 @@ export const ErrorContainer = styled.div`
     align-items: center;
     justify-content: center;
     gap: 12px;
+    background-color: ${({ theme }) => theme.bg};
 `;
 
 export const Emoji = styled.img`
@@ -20,21 +21,21 @@ export const Emoji = styled.img`
 export const Title = styled.h2`
     font-size: 1.063rem;
     font-weight: 600;
-    color: #050510;
+    color: ${({ theme }) => theme.text};
     line-height: 22px;
 `;
 
 export const Subtitle = styled.h3`
     font-size: 1rem;
     font-weight: 400;
-    color: #97979B;
+    color: ${({ theme }) => theme.secondaryText};
     line-height: 20px;
 `;
 
 export const RetryButton = styled.button`
     font-size: 1rem;
     font-weight: 600;
-    color: #6534FF;
+    color: ${({ theme }) => theme.accent};
     line-height: 20px;
     background: none;
     border: none;

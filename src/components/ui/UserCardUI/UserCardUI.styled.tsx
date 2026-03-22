@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 export const Card = styled.li<{ variant?: "list" | "profile" }>`
     display: flex;
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.bg};
     cursor: pointer;
 
     ${({ variant }) =>
@@ -10,7 +10,7 @@ export const Card = styled.li<{ variant?: "list" | "profile" }>`
         css`
             flex-direction: column;
             align-items: center;
-            background-color: #fff;
+            background-color: ${({ theme }) => theme.bg};
             padding-bottom: 16px;
             cursor: default;
         `}
@@ -32,7 +32,7 @@ export const ProfileCard = styled(Card)`
     flex-direction: column;
     align-items: center;
     padding: 0 16px 24px;
-    background-color: #f7f7f8;
+    background-color: ${({ theme }) => theme.card};
 `;
 
 export const Avatar = styled.img<{
@@ -75,7 +75,7 @@ export const Name = styled.span<{ variant?: "list" | "profile" }>`
     flex-direction: row;
     font-weight: 500;
     font-size: 1rem;
-    color: #050510;
+    color: ${({ theme }) => theme.text};
     padding-top: 17px;
     align-items: flex-end;
     line-height: 20px;
@@ -94,7 +94,7 @@ export const Name = styled.span<{ variant?: "list" | "profile" }>`
 export const Tag = styled.span<{ variant?: "list" | "profile" }>`
     font-size: 0.875rem;
     font-weight: 500;
-    color: #97979b;
+    color: ${({ theme }) => theme.secondaryText};
     margin-left: 4px;
     line-height: 18px;
 
@@ -110,19 +110,19 @@ export const Department = styled.span`
     font-size: 0.813rem;
     font-weight: 400;
     line-height: 16px;
-    color: #55555c;
+    color: ${({ theme }) => theme.department};
 `;
 
 export const Extra = styled.div`
     padding: 20px 16px;
     font-size: 0.75rem;
-    color: #050510;
+    color: ${({ theme }) => theme.text};
     display: flex;
     align-items: center;
     gap: 8px;
     width: 100%;
     justify-content: flex-start;
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.bg};
 
     &:last-child {
         margin-top: 4px;
@@ -134,7 +134,7 @@ export const BirthdayBlockProfile = styled.div`
     width: 100%;
     font-size: 0.938rem;
     font-weight: 400;
-    color: #55555c;
+    color: ${({ theme }) => theme.department};
     align-items: center;
     line-height: 20px;
     justify-content: space-between;
@@ -144,7 +144,7 @@ export const Birthday = styled.span`
     display: block;
     font-size: 1rem;
     font-weight: 500;
-    color: #050510;
+    color: ${({ theme }) => theme.text};
 `;
 
 export const UserAge = styled.span`
@@ -158,7 +158,7 @@ export const Phone = styled.a`
     display: block;
     font-size: 1rem;
     font-weight: 500;
-    color: #050510;
+    color: ${({ theme }) => theme.text};
 
     &:hover {
     text-decoration: underline;
@@ -168,5 +168,5 @@ export const Phone = styled.a`
 export const BirthdayBlock = styled.div`
     font-size: 0.938rem;
     font-weight: 400;
-    color: #55555c;
+    color: ${({ theme }) => theme.department};
 `;

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTheme } from "styled-components";
 import {
     Overlay,
     ModalContainer,
@@ -22,6 +23,7 @@ export const SortModalUI: React.FC<SortModalUIProps> = ({
     onOptionChange,
 }) => {
     if (!isOpen) return null;
+    const theme = useTheme();
 
     return (
         <Overlay onClick={onClose}>
@@ -40,7 +42,7 @@ export const SortModalUI: React.FC<SortModalUIProps> = ({
                             <rect
                                 width="24"
                                 height="24"
-                                fill="#f7f7f8"
+                                fill={theme.card}
                                 rx="12"
                             />
                             <path

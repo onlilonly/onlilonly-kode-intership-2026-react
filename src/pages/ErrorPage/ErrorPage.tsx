@@ -13,7 +13,7 @@ import glass from '../../assets/left-pointing-magnifying-glass_1f50d.png'
 export const ErrorBlockPage: React.FC = () => {
     const navigate = useNavigate();
     const onRetry = () => {
-        navigate("/users");
+        navigate("/");
     };
 
     return (
