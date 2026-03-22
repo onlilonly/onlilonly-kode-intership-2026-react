@@ -1,20 +1,49 @@
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import React, { useEffect, useCallback, useMemo, useState } from "react";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
-import { getUsers, getUsersByDepartment, setSearch, setOption, setFilter } from "../../store/usersSlice";
+import { useNetworkStatus } from "../../hooks/useNetworkStatus";
+import {
+    getUsers,
+    getUsersByDepartment,
+    setSearch,
+    setOption,
+    setFilter,
+} from "../../store/usersSlice";
 import HomePageUI from "../../components/ui/pages/HomePageUI/HomePageUI";
 import { FILTER_LABELS } from "../../constants/filters";
 import type { TDepartment } from "../../types";
 
 export const HomePage: React.FC = () => {
+    const isOnline = useNetworkStatus();
     const dispatch = useAppDispatch();
     const { users, usersByDepartment, isLoading, error } = useAppSelector(
         (state) => state.users,
     );
+    const [wasOffline, setWasOffline] = useState(false);
+    useEffect(() => {
+        let timer: number;
+        if (!isOnline) {
+            setWasOffline(true);
+        }
 
-    const search = useAppSelector(state => state.users.search);
-    const option = useAppSelector(state => state.users.option);
-    const activeFilter = useAppSelector(state => state.users.filter);
+        if (isOnline && wasOffline) {
+            timer = setTimeout(() => {
+                setWasOffline(false);
+            }, 500);
+            dispatch(getUsers());
+        }
+
+        return () => clearTimeout(timer);
+    }, [isOnline, wasOffline, dispatch]);
+
+    const topBarStatus: "ok" | "loading" | "error" = !isOnline
+        ? "error"
+        : wasOffline
+          ? "loading"
+          : "ok";
+    const search = useAppSelector((state) => state.users.search);
+    const option = useAppSelector((state) => state.users.option);
+    const activeFilter = useAppSelector((state) => state.users.filter);
 
     const filters = Object.keys(FILTER_LABELS) as TDepartment[];
 
@@ -49,12 +78,8 @@ export const HomePage: React.FC = () => {
         return baseUsers.filter((user) => {
             if (!search) return true;
             return (
-                user.firstName
-                    .toLowerCase()
-                    .includes(search.toLowerCase()) ||
-                user.lastName
-                    .toLowerCase()
-                    .includes(search.toLowerCase()) ||
+                user.firstName.toLowerCase().includes(search.toLowerCase()) ||
+                user.lastName.toLowerCase().includes(search.toLowerCase()) ||
                 user.userTag.toLowerCase().includes(search.toLowerCase())
             );
         });
@@ -105,6 +130,7 @@ export const HomePage: React.FC = () => {
             sortOption={option}
             isLoading={isLoading}
             error={error}
+            status={topBarStatus}
         />
     );
 };

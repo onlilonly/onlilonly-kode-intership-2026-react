@@ -5,23 +5,34 @@ export const TopBarContainer = styled.div`
     display: flex;
     flex-direction: column;
     background-color: ${({ theme }) => theme.bg};
-    padding: 8px 16px 0px;
     position: sticky;
     top: 0;
 `;
 
-export const SearchLabel = styled.div`
+export const TopSection = styled.div<{ status: string }>`
+    margin: 0;
+    padding: 8px 16px 0;
+    width: 100%;
+    min-height: 108px;
+    background-color: ${({ status }) =>
+        status === "error"
+            ? "#F44336"
+            : status === "loading"
+              ? "#6534FF"
+              : ({ theme }) => theme.bg};
+`;
+
+export const SearchLabel = styled.div<{ status: string }>`
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-weight: 700;
     font-size: 1.5rem;
-    margin-top: 8px;
-    margin-bottom: 12px;
-    margin-left: 8px;
+    margin: 8px 0 12px 8px;
     text-align: start;
     line-height: 1.75rem;
-    color: ${({ theme }) => theme.text};
+    color: ${({ theme, status }) =>
+        status === "error" || status === "loading" ? "#ffffff" : theme.text};
 `;
 
 export const SearchInputContainer = styled.div`
@@ -71,9 +82,7 @@ export const SearchInput = styled.input`
 export const FiltersContainer = styled.ul`
     display: flex;
     margin: 0;
-    padding: 0;
-    margin-top: 8px;
-    padding-top: 8px;
+    padding: 16px 16px 0px;
     list-style: none;
     width: clamp(21.4375rem, -2rem + 100vw, 118rem);
     overflow-x: auto;
@@ -111,7 +120,19 @@ export const Separator = styled.hr`
     padding: 0;
     border: none;
     width: 100%;
-    border-top:  ${({ theme }) => `0.33px solid ${theme.secondaryText}`};
+    border-top: ${({ theme }) => `0.33px solid ${theme.secondaryText}`};
     position: sticky;
-    top: 150px;
+    top: 162px;
+`;
+
+export const ErrorMessage = styled.h2`
+    display: block;
+    font-size: 0.813rem;
+    font-weight: 500;
+    line-height: 16px;
+    color: #fff;
+    padding: 20px 8px 0;
+    margin-bottom: 0;
+    text-align: start;
+    background-color: transparent;
 `;

@@ -20,6 +20,7 @@ interface HomePageProps {
     sortOption: "alphabet" | "birthday";
     isLoading: boolean;
     error: string | null;
+    status: "ok" | "loading" | "error";
 }
 
 const HomePageUI: React.FC<HomePageProps> = ({
@@ -33,6 +34,7 @@ const HomePageUI: React.FC<HomePageProps> = ({
     sortOption,
     isLoading,
     error,
+    status,
 }) => {
     return (
         <Container>
@@ -44,6 +46,7 @@ const HomePageUI: React.FC<HomePageProps> = ({
                 onSortChange={onSortChange}
                 activeFilter={activeFilter}
                 sortOption={sortOption}
+                status={status}
             />
             {error !== null ? (
                 <ErrorBlockPage />
