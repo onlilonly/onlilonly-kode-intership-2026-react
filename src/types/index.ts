@@ -11,7 +11,7 @@ export type TDepartment =
     | "backend"
     | "support"
     | "analytics"
-    | string;
+    | "all";
 
 export interface TUser {
     id: string;

@@ -12,13 +12,14 @@ import {
     Li,
 } from "./TopAppBarUI.styled";
 import { FILTER_LABELS } from "../../../constants/filters";
+import type { TDepartment } from "../../../types";
 
 interface TopBarContainerUIProps {
     searchValue: string;
     onSearchChange: (value: string) => void;
-    filters: string[];
+    filters: TDepartment[];
     activeFilter: string;
-    onFilterClick: (filter: string) => void;
+    onFilterClick: (filter: TDepartment) => void;
     onFilterIconClick?: () => void;
     sortOption: string;
 }
@@ -71,12 +72,6 @@ export const TopAppBarUI: React.FC<TopBarContainerUIProps> = ({
                 </SearchInputContainer>
 
                 <FiltersContainer>
-                    <FilterButton
-                        active={activeFilter === "all"}
-                        onClick={() => onFilterClick("all")}
-                    >
-                        Все
-                    </FilterButton>
                     {filters.map((filter) => (
                         <Li key={filter}>
                             <FilterButton

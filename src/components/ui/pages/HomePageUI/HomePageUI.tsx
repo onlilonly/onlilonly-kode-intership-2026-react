@@ -7,22 +7,24 @@ import {
     ErrorBlockPage,
     NoOneFoundBlock,
 } from "../../../../pages/ErrorPage/ErrorPage";
-import type { TUser } from "../../../../types";
+import type { TDepartment, TUser } from "../../../../types";
 
 interface HomePageProps {
-    filters: string[];
+    filters: TDepartment[];
+    searchValue: string;
     onSearch?: (value: string) => void;
-    onFilterChange?: (filter: string) => void;
+    onFilterChange: (filter: TDepartment) => void;
     onSortChange?: (option: "alphabet" | "birthday") => void;
     users: TUser[];
     activeFilter: string;
-    sortOption: string;
+    sortOption: "alphabet" | "birthday";
     isLoading: boolean;
     error: string | null;
 }
 
 const HomePageUI: React.FC<HomePageProps> = ({
     filters,
+    searchValue,
     onSearch,
     onFilterChange,
     onSortChange,
@@ -36,6 +38,7 @@ const HomePageUI: React.FC<HomePageProps> = ({
         <Container>
             <TopAppBar
                 filters={filters}
+                searchValue={searchValue}
                 onSearch={onSearch}
                 onFilterChange={onFilterChange}
                 onSortChange={onSortChange}

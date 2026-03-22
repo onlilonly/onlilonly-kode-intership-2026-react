@@ -1,4 +1,7 @@
-export const FILTER_LABELS: Record<string, string> = {
+import type { TDepartment } from "../types";
+
+export const FILTER_LABELS: Record<TDepartment, string> = {
+  all: "Все",
   android: "Android",
   ios: "iOS",
   design: "Дизайн",

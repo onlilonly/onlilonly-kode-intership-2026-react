@@ -6,6 +6,9 @@ import { getUsersApi, getUsersByDepartmentApi } from "../services/api";
 export type userState = {
     users: TUser[];
     usersByDepartment: TUser[];
+    search: string;
+    option: "alphabet" | "birthday";
+    filter: TDepartment;
     isLoading: boolean;
     error: string | null;
 };
@@ -13,6 +16,9 @@ export type userState = {
 const initialState: userState = {
     users: [],
     usersByDepartment: [],
+    search: "",
+    option: "alphabet",
+    filter: "all",
     isLoading: false,
     error: null,
 };
@@ -33,7 +39,17 @@ export const getUsersByDepartment = createAsyncThunk<TUser[], TDepartment>(
 const usersSlice = createSlice({
     name: "users",
     initialState,
-    reducers: {},
+    reducers: {
+        setSearch(state, action: PayloadAction<string>) {
+            state.search = action.payload;
+        },
+        setOption(state, action: PayloadAction<"alphabet" | "birthday">) {
+            state.option = action.payload;
+        },
+        setFilter(state, action: PayloadAction<TDepartment>) {
+            state.filter = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getUsers.pending, (state) => {
@@ -73,4 +89,5 @@ const usersSlice = createSlice({
     },
 });
 
+export const { setSearch, setOption, setFilter } = usersSlice.actions;
 export default usersSlice.reducer;

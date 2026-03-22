@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { TopAppBarUI } from "../ui/TopAppBarUI/TopAppBarUI";
 import { SortModal } from "../SortModal/SortModal";
+import type { TDepartment } from "../../types";
 
 interface TopAppBarProps {
-    filters: string[];
+    filters: TDepartment[];
+    searchValue: string;
     onSearch?: (value: string) => void;
-    onFilterChange?: (filter: string) => void;
+    onFilterChange: (filter: TDepartment) => void;
     onSortChange?: (option: "alphabet" | "birthday") => void;
     activeFilter: string;
     sortOption: "alphabet" | "birthday";
@@ -14,21 +16,20 @@ interface TopAppBarProps {
 export const TopAppBar: React.FC<TopAppBarProps> = React.memo(
     ({
         filters,
+        searchValue,
         onSearch,
         onFilterChange,
         onSortChange,
         activeFilter,
         sortOption,
     }) => {
-        const [searchValue, setSearchValue] = useState("");
         const [isSortModalOpen, setIsSortModalOpen] = useState(false);
 
         const handleSearchChange = (value: string) => {
-            setSearchValue(value);
             onSearch?.(value);
         };
 
-        const handleFilterClick = (filter: string) => {
+        const handleFilterClick = (filter: TDepartment) => {
             onFilterChange?.(filter);
         };
 
