@@ -7,7 +7,9 @@ import { FILTER_LABELS } from "../../constants/filters";
 
 export const HomePage: React.FC = () => {
     const dispatch = useAppDispatch();
-    const { users, isLoading, error } = useAppSelector((state) => state.users);
+    const { users, usersByDepartment, isLoading, error } = useAppSelector(
+        (state) => state.users,
+    );
 
     const [searchValue, setSearchValue] = useState("");
     const [sortOption, setSortOption] = useState<"alphabet" | "birthday">(
@@ -16,6 +18,10 @@ export const HomePage: React.FC = () => {
     const [activeFilter, setActiveFilter] = useState<string>("all");
 
     const filters = Object.keys(FILTER_LABELS);
+
+    const baseUsers = useMemo(() => {
+        return activeFilter === "all" ? users : usersByDepartment;
+    }, [activeFilter, users, usersByDepartment]);
 
     useEffect(() => {
         dispatch(getUsers());
@@ -33,9 +39,7 @@ export const HomePage: React.FC = () => {
         (filter: string) => {
             setActiveFilter(filter);
 
-            if (filter === "all") {
-                dispatch(getUsers());
-            } else {
+            if (filter !== "all") {
                 dispatch(getUsersByDepartment(filter));
             }
         },
@@ -43,7 +47,7 @@ export const HomePage: React.FC = () => {
     );
 
     const filteredUsers = useMemo(() => {
-        return users.filter((user) => {
+        return baseUsers.filter((user) => {
             if (!searchValue) return true;
             return (
                 user.firstName
@@ -55,7 +59,7 @@ export const HomePage: React.FC = () => {
                 user.userTag.toLowerCase().includes(searchValue.toLowerCase())
             );
         });
-    }, [users, searchValue]);
+    }, [baseUsers, searchValue]);
 
     const sortedUsers = useMemo(() => {
         if (sortOption === "birthday") {

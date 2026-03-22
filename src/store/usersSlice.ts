@@ -5,12 +5,14 @@ import { getUsersApi, getUsersByDepartmentApi } from "../services/api";
 
 export type userState = {
     users: TUser[];
+    usersByDepartment: TUser[];
     isLoading: boolean;
     error: string | null;
 };
 
 const initialState: userState = {
     users: [],
+    usersByDepartment: [],
     isLoading: false,
     error: null,
 };
@@ -59,7 +61,7 @@ const usersSlice = createSlice({
                 getUsersByDepartment.fulfilled,
                 (state, action: PayloadAction<TUser[]>) => {
                     state.isLoading = false;
-                    state.users = action.payload;
+                    state.usersByDepartment = action.payload;
                 },
             )
             .addCase(getUsersByDepartment.rejected, (state, action) => {
