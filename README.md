@@ -1,3 +1,5 @@
+Github pages: https://onlilonly.github.io/onlilonly-kode-intership-2026-react/
+
 # Тестовое задание
 
 ФИ: Голубева Ульяна
